@@ -55,11 +55,11 @@ router.route('/conversion')
                     let rate = data.rates;
                     console.log(rate);
                     let final_rate = rate[Object.keys(rate)[0]];
-                    console.log(final_rate);
+                    console.log(final_rate + ' final rate');
                     let final_amount = amount * final_rate;
                     final_amount = Math.round(final_amount * 100)/100;
+                    console.log(final_amount + ' final amount');
                     end_result = final_amount;
-                    console.log(final_amount);
                 })
             console.log(end_result + ' here');
             return end_result;
