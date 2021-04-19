@@ -43,7 +43,7 @@ router.route('/conversion')
             return;
         }
 
-        let original_amount = !req.body.amount;
+        let original_amount = req.body.amount;
         let to_currency = req.body.currency;
 
         async function fetchRate(symb, amount) {
