@@ -8,7 +8,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var cors = require('cors');
-
+const fetch = require("node-fetch");
 var app = express();
 app.use(cors());
 app.use(bodyParser.json());
