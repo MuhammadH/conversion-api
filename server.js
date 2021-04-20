@@ -1,7 +1,6 @@
 /*
-CSC3916 HW2
-File: Server.js
-Description: Web API scaffolding for Movie API
+CSC3916 final project api
+Description: Web API for currency cost conversion
  */
 
 var express = require('express');
@@ -74,86 +73,8 @@ router.route('/conversion')
     )
     .get(function(req, res) {
             console.log(req.body);
-            // set status code
-
-            let id = " ";
-            if (req.body.movie) {
-                id = req.body.movie;
-            }
-            if (req.headers.movie) {
-                id = req.headers.movie;
-            }
-
+            res.json({status: 200, success: true, message: 'use post (for body)'});
     }
-    )
-;
-
-
-
-
-router.route('/reviews')
-    .post(function(req, res) {
-        if (!req.body.reviewer_name || !req.body.rating || !req.body.movie || !req.body.review) {
-            res.json({success: false, msg: 'Please include all data.'});
-            return;
-        }
-
-        var new_rev = new Review();
-
-        new_rev.reviewer_name = req.body.reviewer_name;
-        new_rev.rating = req.body.rating;
-        new_rev.movie = req.body.movie;
-        new_rev.review = req.body.review;
-
-        let id = req.body.movie;
-
-        Movie.findOne({ title: id }).select('title year genre cast').exec(function(err, movie) {
-            // Movie.findById(id, function(err, movie) {
-            if (!movie) {
-                return res.json({ success: false, message: 'movie does not exist.'});
-            } else if (movie) {
-                new_rev.save(function(err){
-                    if (err) {
-                        if (err.code == 11000)
-                            return res.json({ success: false, message: 'review failed to save.'});
-                        else
-                            return res.json(err);
-                    }
-
-                    res.json({success: true, msg: 'Successfully created new review.'})
-                });
-            }
-        })
-
-        }
-    )
-    .get(function(req, res) {
-        if (!req.body.id) {
-            res.json({success: false, msg: 'Please include all data.'});
-            return;
-        }
-
-        // check if movie exists
-        let id = req.body.id;
-        Movie.findOne({ title: id }).select('title year genre cast').exec(function(err, movie) {
-            // Movie.findById(id, function(err, movie) {
-            if (movie) {
-                Review.findOne({ movie: id }).select('reviewer_name rating movie review').exec(function(err, review) {
-                    if(review) {
-                        //var review_json = JSON.stringify(review);
-                        res.json({status: 200, success: true, reviews: review});
-                    } else {
-
-                    }
-                });
-            } else {
-                return res.json({ success: false, message: 'movie does not exist.'});
-            }
-        })
-
-
-
-        }
     )
 ;
 
